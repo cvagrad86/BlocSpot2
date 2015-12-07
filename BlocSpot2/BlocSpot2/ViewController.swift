@@ -23,7 +23,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, 
     //starts map overlooking Pyrenees
     
     let initialLocation = CLLocation(latitude: 42.988566, longitude: 0.460573)
-    var annotation:MKAnnotation!
+    
     var searchController:UISearchController!
     var localSearchRequest:MKLocalSearchRequest!
     var localSearch:MKLocalSearch!
@@ -31,7 +31,6 @@ class ViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, 
     var error:NSError!
     var pointAnnotation:MKPointAnnotation!
     var pinAnnotationView:MKPinAnnotationView!
-    
     var mapItemData:MKMapItem!
     
     
@@ -56,6 +55,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, 
         mapView.addGestureRecognizer(addSpot)
         
         mapView.delegate = self
+        
         
         
         
@@ -84,28 +84,63 @@ class ViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, 
             pointAnnotation.subtitle = "click i to add details"
             let pinAnnotationView = MKPinAnnotationView(annotation: pointAnnotation, reuseIdentifier: nil)
             self.mapView.addAnnotation(pinAnnotationView.annotation!)
+            print(pointAnnotation.coordinate)
         }
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
         
-        let identifier = "Places"
+        let identifier = "PinDetails"
         var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
         annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
         annotationView!.canShowCallout = true
         let btn = UIButton(type: .DetailDisclosure)
         annotationView!.rightCalloutAccessoryView = btn
+        
+        //adding this create the push segue immediately, but still does not send the lat/long values
+        //self.performSegueWithIdentifier("UserInfo", sender: self)
+        
         return annotationView
         
     }
     
+
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if(segue.identifier == "PinDetails") {
+            
+            let yourNextViewController = segue.destinationViewController as! PlacesDetailViewController
+            
+            //this returns 0.0
+            if let senderObject = sender as? MKPinAnnotationView {
+                yourNextViewController.placeLatitude = (senderObject.annotation?.coordinate.latitude)!
+                yourNextViewController.placeLongitude = (senderObject.annotation?.coordinate.longitude)!
+                
+            }
+            
+            //these return 0.0
+            //yourNextViewController.placeLongitude = (pinAnnotationView.annotation?.coordinate.longitude)!
+            //yourNextViewController.placeLatitude = (pinAnnotationView.annotation?.coordinate.latitude)!
+
+            
+            //this creates a crash
+            //yourNextViewController.placeLongitude = CLLocationCoordinate2DMake(self.pointAnnotation.coordinate.latitude, self.pointAnnotation.coordinate.longitude)
+            
+            //this creates a crash - unexpectedly found nil while unwrapping an optional value. 
+            //yourNextViewController.placeLatitude = (pointAnnotation.coordinate.latitude)
+            
+            
+        }
+    }
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
         if control == view.rightCalloutAccessoryView {
             performSegueWithIdentifier("PinDetails", sender: self)
+            
+            
         }
     }
     

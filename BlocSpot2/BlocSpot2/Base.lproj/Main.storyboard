@@ -48,6 +48,9 @@
                             </barButtonItem>
                             <barButtonItem image="list1x" id="xnz-XE-zUu">
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <segue destination="OmE-ef-Xae" kind="showDetail" id="FK4-UE-nku"/>
+                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
@@ -131,6 +134,9 @@
                                 <state key="normal" title="Save"/>
                                 <connections>
                                     <action selector="savePlaceDetails:" destination="xKf-l8-8JL" eventType="touchUpInside" id="T6A-jr-w1F"/>
+                                    <segue destination="OmE-ef-Xae" kind="popoverPresentation" identifier="placeDetails" popoverAnchorView="zFo-pU-HIG" id="SuB-2U-30d">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
                                 </connections>
                             </button>
                         </subviews>
@@ -175,6 +181,70 @@
             </objects>
             <point key="canvasLocation" x="1793" y="349"/>
         </scene>
+        <!--Pyrenees Rando-->
+        <scene sceneID="rik-FP-MQH">
+            <objects>
+                <tableViewController id="q3U-vg-2KK" customClass="PlacesDetailTableTableViewController" customModule="BlocSpot2" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="KWb-bu-U6G">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="placeCell" textLabel="ePM-e8-n2M" detailTextLabel="hoT-sH-fae" style="IBUITableViewCellStyleValue2" id="rYg-7W-Q9F">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rYg-7W-Q9F" id="4TC-Py-PgZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ePM-e8-n2M">
+                                            <rect key="frame" x="15" y="14" width="91" height="15"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hoT-sH-fae">
+                                            <rect key="frame" x="112" y="14" width="33" height="15"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <animations/>
+                                </tableViewCellContentView>
+                                <animations/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="q3U-vg-2KK" id="cUe-Rq-buD"/>
+                            <outlet property="delegate" destination="q3U-vg-2KK" id="e7W-vX-60A"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Pyrenees Rando" id="HvB-CP-UvM">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="Yna-kT-qgb"/>
+                        <barButtonItem key="leftBarButtonItem" image="filter1x" id="XIw-7Z-JXn">
+                            <color key="tintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="xKf-l8-8JL" kind="show" id="Yj6-Tp-6YD"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="asJ-h1-uKf">
+                            <color key="tintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="show" id="VLs-DO-wlI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jIi-ub-w5O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3465" y="325"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="qGj-Rw-yxR">
             <objects>
@@ -194,10 +264,39 @@
             </objects>
             <point key="canvasLocation" x="305" y="1014"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5Hz-g9-PgM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="OmE-ef-Xae" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="afp-iK-pkC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="3C1-oo-DMQ">
+                        <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="q3U-vg-2KK" kind="relationship" relationship="rootViewController" id="xbs-k1-ofm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p17-jz-SFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2653" y="325"/>
+        </scene>
     </scenes>
     <resources>
         <image name="filter1x" width="14" height="14"/>
         <image name="list1x" width="19" height="14"/>
         <image name="search1xa" width="24" height="24"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="FK4-UE-nku"/>
+        <segue reference="VLs-DO-wlI"/>
+        <segue reference="Yj6-Tp-6YD"/>
+    </inferredMetricsTieBreakers>
 </document>

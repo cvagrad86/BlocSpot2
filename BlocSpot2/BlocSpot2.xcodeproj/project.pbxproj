@@ -19,6 +19,11 @@
 		935F81DD1C107F4200611732 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 935F81DC1C107F4200611732 /* CoreLocation.framework */; };
 		935F81DF1C107F4900611732 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 935F81DE1C107F4900611732 /* CoreData.framework */; };
 		935F81E51C1080B000611732 /* PlacesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F81E41C1080B000611732 /* PlacesDetailViewController.swift */; };
+		935F81EA1C10A8CE00611732 /* PlacesDetails+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F81E61C10A8CE00611732 /* PlacesDetails+CoreDataProperties.swift */; };
+		935F81EB1C10A8CE00611732 /* PlacesDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F81E71C10A8CE00611732 /* PlacesDetails.swift */; };
+		935F81EC1C10A8CE00611732 /* Places+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F81E81C10A8CE00611732 /* Places+CoreDataProperties.swift */; };
+		935F81ED1C10A8CE00611732 /* Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F81E91C10A8CE00611732 /* Places.swift */; };
+		935F81EF1C1497C800611732 /* PlacesDetailTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F81EE1C1497C800611732 /* PlacesDetailTableTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +62,11 @@
 		935F81DC1C107F4200611732 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		935F81DE1C107F4900611732 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		935F81E41C1080B000611732 /* PlacesDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesDetailViewController.swift; sourceTree = "<group>"; };
+		935F81E61C10A8CE00611732 /* PlacesDetails+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PlacesDetails+CoreDataProperties.swift"; path = "../PlacesDetails+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		935F81E71C10A8CE00611732 /* PlacesDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlacesDetails.swift; path = ../PlacesDetails.swift; sourceTree = "<group>"; };
+		935F81E81C10A8CE00611732 /* Places+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Places+CoreDataProperties.swift"; path = "../Places+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		935F81E91C10A8CE00611732 /* Places.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Places.swift; path = ../Places.swift; sourceTree = "<group>"; };
+		935F81EE1C1497C800611732 /* PlacesDetailTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesDetailTableTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +172,10 @@
 		935F81E21C107F7000611732 /* DataControllers */ = {
 			isa = PBXGroup;
 			children = (
+				935F81E61C10A8CE00611732 /* PlacesDetails+CoreDataProperties.swift */,
+				935F81E71C10A8CE00611732 /* PlacesDetails.swift */,
+				935F81E81C10A8CE00611732 /* Places+CoreDataProperties.swift */,
+				935F81E91C10A8CE00611732 /* Places.swift */,
 			);
 			name = DataControllers;
 			sourceTree = "<group>";
@@ -170,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				935F81E41C1080B000611732 /* PlacesDetailViewController.swift */,
+				935F81EE1C1497C800611732 /* PlacesDetailTableTableViewController.swift */,
 				935F81AB1C107F0600611732 /* ViewController.swift */,
 			);
 			name = ViewControllers;
@@ -311,10 +326,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				935F81EA1C10A8CE00611732 /* PlacesDetails+CoreDataProperties.swift in Sources */,
+				935F81EC1C10A8CE00611732 /* Places+CoreDataProperties.swift in Sources */,
+				935F81EF1C1497C800611732 /* PlacesDetailTableTableViewController.swift in Sources */,
 				935F81AC1C107F0600611732 /* ViewController.swift in Sources */,
 				935F81B21C107F0700611732 /* BlocSpot2.xcdatamodeld in Sources */,
 				935F81E51C1080B000611732 /* PlacesDetailViewController.swift in Sources */,
+				935F81EB1C10A8CE00611732 /* PlacesDetails.swift in Sources */,
 				935F81AA1C107F0600611732 /* AppDelegate.swift in Sources */,
+				935F81ED1C10A8CE00611732 /* Places.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

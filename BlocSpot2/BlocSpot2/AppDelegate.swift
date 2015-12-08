@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
             // Create Managed Object
-            let entityDescription = NSEntityDescription.entityForName("Places", inManagedObjectContext: self.managedObjectContext)
+            //let entityDescription = NSEntityDescription.entityForName("Places", inManagedObjectContext: self.managedObjectContext)
             //let newplace = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: self.managedObjectContext)
          
             return true

@@ -34,6 +34,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, 
     var mapItemData:MKMapItem!
     
     
+    
     // MARK: - location manager to authorize user location for Maps app
     
     func checkLocationAuthorizationStatus() {
@@ -78,13 +79,14 @@ class ViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, 
         if gestureRecognizer.state == UIGestureRecognizerState.Began {
             let touchPoint = gestureRecognizer.locationInView(mapView)
             let newCoordinate: CLLocationCoordinate2D = mapView.convertPoint(touchPoint, toCoordinateFromView: self.mapView)
-            let pointAnnotation = MKPointAnnotation()
+            self.pointAnnotation = MKPointAnnotation()
             pointAnnotation.coordinate = newCoordinate
             pointAnnotation.title = "New Place Added"
             pointAnnotation.subtitle = "click i to add details"
             let pinAnnotationView = MKPinAnnotationView(annotation: pointAnnotation, reuseIdentifier: nil)
             self.mapView.addAnnotation(pinAnnotationView.annotation!)
             print(pointAnnotation.coordinate)
+            
         }
     }
     
@@ -114,11 +116,12 @@ class ViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, 
             let yourNextViewController = segue.destinationViewController as! PlacesDetailViewController
             
             //this returns 0.0
-            if let senderObject = sender as? MKPinAnnotationView {
-                yourNextViewController.placeLatitude = (senderObject.annotation?.coordinate.latitude)!
-                yourNextViewController.placeLongitude = (senderObject.annotation?.coordinate.longitude)!
+            //if let senderObject = self.pointAnnotation {
+                yourNextViewController.placeLatitude = (pointAnnotation.coordinate.latitude)
+                yourNextViewController.placeLongitude = (pointAnnotation.coordinate.longitude)
+            
                 
-            }
+            //}
             
             //these return 0.0
             //yourNextViewController.placeLongitude = (pinAnnotationView.annotation?.coordinate.longitude)!
@@ -130,8 +133,6 @@ class ViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, 
             
             //this creates a crash - unexpectedly found nil while unwrapping an optional value. 
             //yourNextViewController.placeLatitude = (pointAnnotation.coordinate.latitude)
-            
-            
         }
     }
     
@@ -139,7 +140,6 @@ class ViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, 
         
         if control == view.rightCalloutAccessoryView {
             performSegueWithIdentifier("PinDetails", sender: self)
-            
             
         }
     }

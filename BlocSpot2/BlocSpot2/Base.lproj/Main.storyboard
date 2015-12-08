@@ -181,51 +181,58 @@
             </objects>
             <point key="canvasLocation" x="1793" y="349"/>
         </scene>
-        <!--Pyrenees Rando-->
+        <!--Pyrenees Rando List-->
         <scene sceneID="rik-FP-MQH">
             <objects>
                 <tableViewController id="q3U-vg-2KK" customClass="PlacesDetailTableTableViewController" customModule="BlocSpot2" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="KWb-bu-U6G">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" id="KWb-bu-U6G">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search for a Rando" showsSearchResultsButton="YES" id="zAd-En-Fdn">
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="q3U-vg-2KK" id="FPP-Rl-LIG"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="placeCell" textLabel="ePM-e8-n2M" detailTextLabel="hoT-sH-fae" style="IBUITableViewCellStyleValue2" id="rYg-7W-Q9F">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="placeCell" textLabel="ePM-e8-n2M" imageView="cc5-nq-Aty" rowHeight="90" style="IBUITableViewCellStyleDefault" id="rYg-7W-Q9F">
+                                <rect key="frame" x="0.0" y="136" width="600" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rYg-7W-Q9F" id="4TC-Py-PgZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="89"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ePM-e8-n2M">
-                                            <rect key="frame" x="15" y="14" width="91" height="15"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ePM-e8-n2M">
+                                            <rect key="frame" x="92" y="0.0" width="493" height="89"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hoT-sH-fae">
-                                            <rect key="frame" x="112" y="14" width="33" height="15"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <animations/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="pin_for_map2" id="cc5-nq-Aty">
+                                            <rect key="frame" x="15" y="2" width="62" height="84"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
+                                        </imageView>
                                     </subviews>
                                     <animations/>
                                 </tableViewCellContentView>
                                 <animations/>
                             </tableViewCell>
                         </prototypes>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="q3U-vg-2KK" id="cUe-Rq-buD"/>
                             <outlet property="delegate" destination="q3U-vg-2KK" id="e7W-vX-60A"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Pyrenees Rando" id="HvB-CP-UvM">
+                    <navigationItem key="navigationItem" title="Pyrenees Rando List" id="HvB-CP-UvM">
                         <barButtonItem key="backBarButtonItem" title="Back" id="Yna-kT-qgb"/>
                         <barButtonItem key="leftBarButtonItem" image="filter1x" id="XIw-7Z-JXn">
                             <color key="tintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
@@ -240,10 +247,22 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="HZI-4d-uKT" id="vfX-5v-2Dk"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jIi-ub-w5O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="HZI-4d-uKT">
+                    <connections>
+                        <outlet property="delegate" destination="q3U-vg-2KK" id="SWk-ib-0Lb"/>
+                        <outlet property="searchBar" destination="zAd-En-Fdn" id="Hrt-F6-shU"/>
+                        <outlet property="searchContentsController" destination="q3U-vg-2KK" id="8kS-LN-Pzo"/>
+                        <outlet property="searchResultsDataSource" destination="q3U-vg-2KK" id="QuR-SN-N2V"/>
+                        <outlet property="searchResultsDelegate" destination="q3U-vg-2KK" id="1gh-Z8-sia"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="3465" y="325"/>
+            <point key="canvasLocation" x="3411" y="55"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qGj-Rw-yxR">
@@ -286,17 +305,18 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p17-jz-SFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2653" y="325"/>
+            <point key="canvasLocation" x="2640" y="683"/>
         </scene>
     </scenes>
     <resources>
         <image name="filter1x" width="14" height="14"/>
         <image name="list1x" width="19" height="14"/>
+        <image name="pin_for_map2" width="62" height="84"/>
         <image name="search1xa" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="FK4-UE-nku"/>
-        <segue reference="VLs-DO-wlI"/>
+        <segue reference="SuB-2U-30d"/>
         <segue reference="Yj6-Tp-6YD"/>
+        <segue reference="VLs-DO-wlI"/>
     </inferredMetricsTieBreakers>
 </document>

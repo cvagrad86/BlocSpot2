@@ -10,46 +10,65 @@ import UIKit
 import CoreData
 
 
-class PlacesDetailTableTableViewController: UITableViewController {
+class PlacesDetailTableTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchBarDelegate, UISearchControllerDelegate {
 
-    var placeList = [Places]()
+    
+    let newPlace = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
+   var vcPlaces = [Places]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        var error:NSError?
+        
+        let request = NSFetchRequest(entityName: "Places")
+        
+        vcPlaces  = (try! newPlace.executeFetchRequest(request)) as! [Places]
+        
+        self.tableView.reloadData()
+        
+        
     }
+    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        
+        //possibly default this to show the various locations automatically based on valley?
+        
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return placeList.count
+        
+        return vcPlaces.count
+        
     }
-
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
+        
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("placeCell", forIndexPath: indexPath) as UITableViewCell
+        
+        _ = vcPlaces[indexPath.row]
+        
+        cell.textLabel?.text = newPlace.name
+        
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        
+        print(newPlace.name)
+        
         return cell
+
     }
-    */
+    
+  
 
     /*
     // Override to support conditional editing of the table view.
@@ -86,14 +105,13 @@ class PlacesDetailTableTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }

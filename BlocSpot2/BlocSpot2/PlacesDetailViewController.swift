@@ -16,7 +16,8 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
 
     @IBOutlet weak var detailMapView: MKMapView!
     
-    var newPlace = [NSManagedObject]()
+    //var newPlace = [NSManagedObject]()
+    let newPlace = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var placeLongitude = Double()
     var placeLatitude = Double()
@@ -32,7 +33,6 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
    
     //want to get the map to center on the place chosen in previous window
     
-    let initialLocation = CLLocation(latitude: 42.988566, longitude: 0.460573)
     
     @IBOutlet weak var notesLabel: UITextField!
     @IBOutlet weak var nameLabel: UITextField!
@@ -44,8 +44,10 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
         
         
         centerMapOnLocation(initialLocation)
+        
         print(placeLatitude)
         print(placeLongitude)
+        
         
     }
 
@@ -79,31 +81,45 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
     @IBAction func savePlaceDetails(sender: AnyObject) {
         
         //when this is clicked, it saves this data AND the lat and long data as Core Data
+        let placeDescription = NSEntityDescription.entityForName("Places", inManagedObjectContext: newPlace)
+
+        let place = Places(entity: placeDescription!, insertIntoManagedObjectContext:  newPlace)
+        //let placeDet = PlacesDetails(entity: placeDescription!, insertIntoManagedObjectContext: newPlace)
+
+        place.name = nameLabel.text
+        place.location = locationLabel.text
         
-       /*
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            let managedContext = appDelegate.managedObjectContext
+        print(place.name)
+        print(place.location)
+        
+        do {
+            try place.managedObjectContext!.save()
+        } catch {
+            fatalError("Failure to save context: \(error)")
+        }
+        
+        //placeDet.notes = notesLabel.text
+/*
+        var error: NSError?
+
+        try newPlace.save(&error)
+
+        if let err = error {
             
-            //Data is in this case the name of the entity
-            let entity = NSEntityDescription.entityForName("Places",
-                inManagedObjectContext: managedContext)
-            let options = NSManagedObject(entity: entity!,
-                insertIntoManagedObjectContext:managedContext)
+            let a = UIAlertController(title: "Error", message: err.localizedFailureReason, preferredStyle: UIAlertControllerStyle.ActionSheet)
+            a.view
             
-            options.setValue(nameLabel, forKey: "name")
-            options.setValue(locationLabel, forKey: "location")
-            options.setValue(notesLabel, forKey: "notes")
-            options.setValue(NSDate.self, forKey: "date")
-            options.setValue(placeLongitude, forKey: "longitude")
-            options.setValue(placeLatitude, forKey: "latitude")
+        } else {
             
-            var error: NSError?
-            //if !managedContext.save(error)
-            //{
-                //print("Could not save")
-           // }
-            //uncomment this line for adding the stored object to the core data array
-            //name_list.append(options)
-        */
-    }
+            let a = UIAlertController(title: "Success", message: "Your new place has been saved", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            
+            a.show()
+
+*/
 }
+
+    
+       
+        
+    }
+

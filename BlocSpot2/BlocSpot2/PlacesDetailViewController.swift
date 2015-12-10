@@ -8,20 +8,23 @@
 
 import UIKit
 import MapKit
-import CoreData
+//import CoreData
 import CoreLocation
+
+
 
 
 class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
 
     @IBOutlet weak var detailMapView: MKMapView!
-    
     @IBOutlet weak var placeLong: UILabel!
     @IBOutlet weak var placeLat: UILabel!
     
+    var currentPlace: Places!
+    
     //var newPlace = [NSManagedObject]()
     
-    let newPlace = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    //let newPlace = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var placeLongitude = Double()
     var placeLatitude = Double()
     var pointAnnotation:MKPointAnnotation!
@@ -41,6 +44,16 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let place = currentPlace {
+            // A place exists.  EDIT Mode.
+            
+        } else {
+            // A place does NOT exist.  ADD Mode.
+            
+            currentPlace = Places.MR_createEntity() as Places
+            currentPlace.name = ""
+        }
+        
         let startingLocation = CLLocationCoordinate2DMake(self.placeLatitude, self.placeLongitude)
         
         centerMapOnLocation(startingLocation)
@@ -54,11 +67,36 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
         print(placeLatitude)
         print(placeLongitude)
         
-        placeLat.text = "Latitude \(placeLatitude)"
-        placeLong.text = "Longitude \(placeLongitude)"
+        placeLat.text = "Lat. \(placeLatitude)"
+        placeLong.text = "Long. \(placeLongitude)"
         
+       
+        if currentPlace.name == "" {
+            title = "New Place"
+        } else {
+            title = currentPlace.name
+        }
         
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        
+        super.viewWillDisappear(true)
+        
+        //------------------------------------------
+        
+        nameLabel.resignFirstResponder()
+        
+        
+        saveContext()
+        
+       
+    }
+    
+    func saveContext() {
+        NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -82,30 +120,34 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
     @IBAction func savePlaceDetails(sender: AnyObject) {
         
         //when this is clicked, it saves this data AND the lat and long data as Core Data
+        if nameLabel.text != "" {
+            //self.title       = nameLabel.text
+            currentPlace.name = nameLabel.text!
+        currentPlace.location = locationLabel.text!
+        currentPlace.longitude = placeLongitude
+        currentPlace.latitude = placeLatitude
+       }
         
-        let placeDescription = NSEntityDescription.entityForName("Places", inManagedObjectContext: newPlace)
-
-        let place = Places(entity: placeDescription!, insertIntoManagedObjectContext:  newPlace)
-
-        place.name = nameLabel.text
-        place.location = locationLabel.text
-        place.longitude = placeLongitude
-        place.latitude = placeLongitude
         
-        print(place.name)
-        print(place.location)
         
-        do {
-            try place.managedObjectContext!.save()
-        } catch {
-            fatalError("Failure to save context: \(error)")
-        }
-        
-
 }
 
     
        
         
     }
+
+extension PlacesDetailViewController: UITextFieldDelegate {
+    
+    // MARK: Managing Editing
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        
+        if textField.text != "" {
+            self.title       = nameLabel.text
+            currentPlace.name = nameLabel.text!
+        }
+    }
+    //#####################################################################
+}
 

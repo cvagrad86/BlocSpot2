@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-import MagicalRecord
+
 
 
 
@@ -20,11 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
             
-            [MagicalRecord setupCoreDataStack]
-            
-            // Create Managed Object
-            //let entityDescription = NSEntityDescription.entityForName("Places", inManagedObjectContext: self.managedObjectContext)
-            //let newplace = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: self.managedObjectContext)
+           MagicalRecord.setupCoreDataStackWithStoreNamed("Places")
          
             return true
         }
@@ -51,9 +47,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
+        
     }
-
+/*
     // MARK: - Core Data stack
 
     lazy var applicationDocumentsDirectory: NSURL = {
@@ -116,6 +112,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+*/
 
 }
 

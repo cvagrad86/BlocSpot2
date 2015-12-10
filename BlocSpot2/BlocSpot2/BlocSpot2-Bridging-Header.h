@@ -9,8 +9,9 @@
 #ifndef BlocSpot2_Bridging_Header_h
 #define BlocSpot2_Bridging_Header_h
 #define MR_SHORTHAND
-#import CoreData+MagicalRecord.h
 
+//#import <CoreData+MagicalRecord.h>
+#import <MagicalRecord/MagicalRecord.h>
 
 
 #endif /* BlocSpot2_Bridging_Header_h */

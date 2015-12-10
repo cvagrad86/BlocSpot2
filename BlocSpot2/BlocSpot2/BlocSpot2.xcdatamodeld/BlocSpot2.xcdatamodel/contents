@@ -12,7 +12,7 @@
         <relationship name="relationship" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Places" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Places" positionX="-326" positionY="-102" width="128" height="103"/>
-        <element name="PlacesDetails" positionX="-54" positionY="-81" width="128" height="88"/>
+        <element name="Places" positionX="-326" positionY="-102" width="128" height="105"/>
+        <element name="PlacesDetails" positionX="-54" positionY="-81" width="128" height="90"/>
     </elements>
 </model>

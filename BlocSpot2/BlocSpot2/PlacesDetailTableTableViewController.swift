@@ -13,24 +13,33 @@ import CoreData
 class PlacesDetailTableTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchBarDelegate, UISearchControllerDelegate {
 
     
-    let newPlace = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    var places: [Places]!
     
-    var vcPlaces = [Places]()
+    let sortKeyName   = "name"
+    let sortKeyRating = "beerDetails.rating"
+    let wbSortKey     = "wbSortKey"
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var error:NSError?
+        fetchAllPlaces()
         
-        let request = NSFetchRequest(entityName: "Places")
-        
-        vcPlaces  = (try! newPlace.executeFetchRequest(request)) as! [Places]
-        
-        self.tableView.reloadData()
-        
-        print(self.vcPlaces.last)
+        tableView.reloadData()
     }
     
+    func fetchAllPlaces() {
+        
+        // Retrieve the current sort key.
+        let sortKey = NSUserDefaults.standardUserDefaults().objectForKey(wbSortKey) as? String
+        
+        // Do not sort in ascending order if sorting by rating (i.e., sort descending).
+        // Otherwise (i.e. sorting alphabetically), sort in ascending order.
+        let ascending = (sortKey == sortKeyRating) ? false : true
+        
+        // Fetch records from Entity Beer using a MagicalRecord method.
+        places = Places.MR_findAllSortedBy(sortKey, ascending: ascending) as! [Places]
+    }
 
 
     override func didReceiveMemoryWarning() {
@@ -48,22 +57,22 @@ class PlacesDetailTableTableViewController: UITableViewController, NSFetchedResu
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return vcPlaces.count
-        
+        //return vcPlaces.count
+        return places.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("placeCell", forIndexPath: indexPath) as UITableViewCell
-        
-        _ = vcPlaces[indexPath.row]
-        
-        cell.textLabel?.text = newPlace.name
-        
-        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("placeCell", forIndexPath: indexPath) as? UITableViewCell ?? UITableViewCell(style: .Subtitle,
+            reuseIdentifier: "placeCell")
         
         
-        print(newPlace.name)
+        
+        let currentplace = places[indexPath.row]
+        cell.textLabel?.text = currentplace.name
+        cell.detailTextLabel?.text = currentplace.location
+        
+       
         
         return cell
 

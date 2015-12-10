@@ -9,10 +9,17 @@
 import Foundation
 import CoreData
 
+//@objc(Places)
+
 
 class Places: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
+    @NSManaged var name: String?
+    @NSManaged var longitude: NSNumber?
+    @NSManaged var latitude: NSNumber?
+    @NSManaged var location: String?
+
+    @NSManaged var placesDetails: PlacesDetails
     
-   
 }

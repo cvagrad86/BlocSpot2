@@ -228,7 +228,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="placeCell" textLabel="ePM-e8-n2M" imageView="cc5-nq-Aty" rowHeight="90" style="IBUITableViewCellStyleDefault" id="rYg-7W-Q9F">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="placeCell" textLabel="ePM-e8-n2M" detailTextLabel="w9q-h2-ZwN" imageView="cc5-nq-Aty" rowHeight="90" style="IBUITableViewCellStyleSubtitle" id="rYg-7W-Q9F">
                                 <rect key="frame" x="0.0" y="136" width="600" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rYg-7W-Q9F" id="4TC-Py-PgZ">
@@ -236,11 +236,11 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ePM-e8-n2M">
-                                            <rect key="frame" x="92" y="0.0" width="493" height="89"/>
+                                            <rect key="frame" x="92" y="28" width="32" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="pin_for_map2" id="cc5-nq-Aty">
@@ -248,6 +248,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <animations/>
                                         </imageView>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="w9q-h2-ZwN">
+                                            <rect key="frame" x="92" y="48" width="41" height="14"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <animations/>
                                 </tableViewCellContentView>
@@ -343,8 +351,8 @@
         <image name="search1xa" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Yj6-Tp-6YD"/>
         <segue reference="FK4-UE-nku"/>
         <segue reference="VLs-DO-wlI"/>
-        <segue reference="2aj-5Z-ma9"/>
     </inferredMetricsTieBreakers>
 </document>

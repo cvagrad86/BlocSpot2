@@ -21,7 +21,6 @@ class ViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, 
     var locationManager = CLLocationManager()
     
     //starts map overlooking Pyrenees
-    
     let initialLocation = CLLocation(latitude: 42.988566, longitude: 0.460573)
     
     var searchController:UISearchController!
@@ -32,6 +31,8 @@ class ViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, 
     var pointAnnotation:MKPointAnnotation!
     var pinAnnotationView:MKPinAnnotationView!
     var mapItemData:MKMapItem!
+    
+    var garonneOverlay:MKPolygon!
     
     
     
@@ -51,13 +52,34 @@ class ViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, 
         centerMapOnLocation(initialLocation)
         checkLocationAuthorizationStatus()
         
+        
+        
+        var coordsGaronne: [CLLocationCoordinate2D] = [
+            CLLocationCoordinate2DMake(43.30343225870785, 0.5996895362299814),
+            CLLocationCoordinate2DMake(43.13114632727472, 0.4735406605249715),
+            CLLocationCoordinate2DMake(43.01179237131475, 0.6144920457147984),
+            CLLocationCoordinate2DMake(42.86666750519025, 0.4664504110596246),
+            CLLocationCoordinate2DMake(42.70476430440321, 0.4694242354839573),
+            CLLocationCoordinate2DMake(42.7023444464383, 0.6724293954056981),
+            CLLocationCoordinate2DMake(42.82627047245492, 0.6722285925662019),
+            CLLocationCoordinate2DMake(42.82062394943355, 0.862425175772441),
+            CLLocationCoordinate2DMake(43.13132577569904, 1.049065884288642),
+            CLLocationCoordinate2DMake(43.28454888824196, 1.282866070213431),
+            CLLocationCoordinate2DMake(43.4135923420815, 0.8489902909390712)
+            ]
+        
+        
         let addSpot = UILongPressGestureRecognizer(target: self, action: "action:")
         addSpot.minimumPressDuration = 1
         mapView.addGestureRecognizer(addSpot)
         
+       
+        
         mapView.delegate = self
         
+        let polygon2 = MKPolygon(coordinates: &coordsGaronne, count: coordsGaronne.count)
         
+        mapView.addOverlay(polygon2)
         
         
     }
@@ -115,24 +137,9 @@ class ViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, 
             
             let yourNextViewController = segue.destinationViewController as! PlacesDetailViewController
             
-            //this returns 0.0
-            //if let senderObject = self.pointAnnotation {
                 yourNextViewController.placeLatitude = (pointAnnotation.coordinate.latitude)
                 yourNextViewController.placeLongitude = (pointAnnotation.coordinate.longitude)
             
-                
-            //}
-            
-            //these return 0.0
-            //yourNextViewController.placeLongitude = (pinAnnotationView.annotation?.coordinate.longitude)!
-            //yourNextViewController.placeLatitude = (pinAnnotationView.annotation?.coordinate.latitude)!
-
-            
-            //this creates a crash
-            //yourNextViewController.placeLongitude = CLLocationCoordinate2DMake(self.pointAnnotation.coordinate.latitude, self.pointAnnotation.coordinate.longitude)
-            
-            //this creates a crash - unexpectedly found nil while unwrapping an optional value. 
-            //yourNextViewController.placeLatitude = (pointAnnotation.coordinate.latitude)
         }
     }
     
@@ -144,5 +151,20 @@ class ViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, 
         }
     }
     
+    func colorMap(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer! {
+        
+        
+        if (overlay is MKPolygon) {
+            
+            let pr1 = MKPolygonRenderer(overlay: overlay)
+            pr1.fillColor = UIColor.redColor().colorWithAlphaComponent(0.1)
+            pr1.strokeColor = UIColor.blackColor().colorWithAlphaComponent(0.3)
+            pr1.lineWidth = 0.5
+            return pr1
+            }
+        return nil
+        }
+    
     
 }
+

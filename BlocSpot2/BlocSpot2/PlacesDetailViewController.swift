@@ -16,23 +16,22 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
 
     @IBOutlet weak var detailMapView: MKMapView!
     
-    //var newPlace = [NSManagedObject]()
-    let newPlace = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    @IBOutlet weak var placeLong: UILabel!
+    @IBOutlet weak var placeLat: UILabel!
     
+    //var newPlace = [NSManagedObject]()
+    
+    let newPlace = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var placeLongitude = Double()
     var placeLatitude = Double()
     var pointAnnotation:MKPointAnnotation!
     var pinAnnotationView:MKPinAnnotationView!
     var mapItemData:MKMapItem!
     var savedAnnotation:MKAnnotation!
-    
-    
+    var inititalLocation:CLLocationCoordinate2D!
     var locationManager = CLLocationManager()
     
-    //need a var to accept the coordinates from the vc
-   
-    //want to get the map to center on the place chosen in previous window
-    
+
     
     @IBOutlet weak var notesLabel: UITextField!
     @IBOutlet weak var nameLabel: UITextField!
@@ -42,11 +41,21 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let startingLocation = CLLocationCoordinate2DMake(self.placeLatitude, self.placeLongitude)
         
-        centerMapOnLocation(initialLocation)
+        centerMapOnLocation(startingLocation)
+        
+        let dropPin = MKPointAnnotation()
+        dropPin.coordinate = CLLocationCoordinate2DMake(self.placeLatitude, self.placeLongitude)
+        dropPin.title = "NewPlace"
+        detailMapView.addAnnotation(dropPin)
+        detailMapView.delegate = self
         
         print(placeLatitude)
         print(placeLongitude)
+        
+        placeLat.text = "Latitude \(placeLatitude)"
+        placeLong.text = "Longitude \(placeLongitude)"
         
         
     }
@@ -59,35 +68,29 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
 
     //want to get the map to center on the place chosen in previous window
     
-    let regionRadius: CLLocationDistance = 200000
+    let regionRadius: CLLocationDistance = 100000
     
-    func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-            regionRadius * 2.0, regionRadius * 2.0)
+    func centerMapOnLocation(location: CLLocationCoordinate2D) {
+       let coordinateRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D.init(latitude: placeLatitude, longitude: placeLongitude),
+            regionRadius * 1.5 , regionRadius * 1.5)
         detailMapView.setRegion(coordinateRegion, animated: true)
         detailMapView.showsCompass = true
         detailMapView.showsScale = true
     }
-    
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        let identifier = "Places"
-        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
-        annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-        annotationView!.canShowCallout = false
-        
-        return annotationView
-    }
+
     
     @IBAction func savePlaceDetails(sender: AnyObject) {
         
         //when this is clicked, it saves this data AND the lat and long data as Core Data
+        
         let placeDescription = NSEntityDescription.entityForName("Places", inManagedObjectContext: newPlace)
 
         let place = Places(entity: placeDescription!, insertIntoManagedObjectContext:  newPlace)
-        //let placeDet = PlacesDetails(entity: placeDescription!, insertIntoManagedObjectContext: newPlace)
 
         place.name = nameLabel.text
         place.location = locationLabel.text
+        place.longitude = placeLongitude
+        place.latitude = placeLongitude
         
         print(place.name)
         print(place.location)
@@ -98,24 +101,7 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
             fatalError("Failure to save context: \(error)")
         }
         
-        //placeDet.notes = notesLabel.text
-/*
-        var error: NSError?
 
-        try newPlace.save(&error)
-
-        if let err = error {
-            
-            let a = UIAlertController(title: "Error", message: err.localizedFailureReason, preferredStyle: UIAlertControllerStyle.ActionSheet)
-            a.view
-            
-        } else {
-            
-            let a = UIAlertController(title: "Success", message: "Your new place has been saved", preferredStyle: UIAlertControllerStyle.ActionSheet)
-            
-            a.show()
-
-*/
 }
 
     

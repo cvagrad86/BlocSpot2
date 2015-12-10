@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5BA92C18E42537B6A6590165 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55501AFA07FD7932B99CB24B /* libPods.a */; };
 		935F81AA1C107F0600611732 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F81A91C107F0600611732 /* AppDelegate.swift */; };
 		935F81AC1C107F0600611732 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F81AB1C107F0600611732 /* ViewController.swift */; };
 		935F81AF1C107F0700611732 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 935F81AD1C107F0700611732 /* Main.storyboard */; };
@@ -44,6 +45,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0975E8404EBDC57675FA002A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		1EB6CEE278A513A9139D018F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		55501AFA07FD7932B99CB24B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		935F81A61C107F0600611732 /* BlocSpot2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlocSpot2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		935F81A91C107F0600611732 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		935F81AB1C107F0600611732 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +71,7 @@
 		935F81E81C10A8CE00611732 /* Places+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Places+CoreDataProperties.swift"; path = "../Places+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		935F81E91C10A8CE00611732 /* Places.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Places.swift; path = ../Places.swift; sourceTree = "<group>"; };
 		935F81EE1C1497C800611732 /* PlacesDetailTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesDetailTableTableViewController.swift; sourceTree = "<group>"; };
+		93D6B0E71C18060E00817C36 /* BlocSpot2-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BlocSpot2-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +82,7 @@
 				935F81DF1C107F4900611732 /* CoreData.framework in Frameworks */,
 				935F81DD1C107F4200611732 /* CoreLocation.framework in Frameworks */,
 				935F81DB1C107F2100611732 /* MapKit.framework in Frameworks */,
+				5BA92C18E42537B6A6590165 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +103,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		39C7B52C67F390355416435B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				55501AFA07FD7932B99CB24B /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7AC9F35A29856F7BE79836D2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1EB6CEE278A513A9139D018F /* Pods.debug.xcconfig */,
+				0975E8404EBDC57675FA002A /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		935F819D1C107F0600611732 = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +130,8 @@
 				935F81C01C107F0700611732 /* BlocSpot2Tests */,
 				935F81CB1C107F0700611732 /* BlocSpot2UITests */,
 				935F81A71C107F0600611732 /* Products */,
+				7AC9F35A29856F7BE79836D2 /* Pods */,
+				39C7B52C67F390355416435B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -158,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				935F81A91C107F0600611732 /* AppDelegate.swift */,
+				93D6B0E71C18060E00817C36 /* BlocSpot2-Bridging-Header.h */,
 			);
 			name = CoreDataManager;
 			sourceTree = "<group>";
@@ -197,9 +223,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 935F81D11C107F0700611732 /* Build configuration list for PBXNativeTarget "BlocSpot2" */;
 			buildPhases = (
+				058EC65853EC110B61684B70 /* Check Pods Manifest.lock */,
 				935F81A21C107F0600611732 /* Sources */,
 				935F81A31C107F0600611732 /* Frameworks */,
 				935F81A41C107F0600611732 /* Resources */,
+				555F3B05DF76115E3DED30CE /* Embed Pods Frameworks */,
+				BBE03DB74FAE769063004DCB /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -320,6 +349,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		058EC65853EC110B61684B70 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		555F3B05DF76115E3DED30CE /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BBE03DB74FAE769063004DCB /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		935F81A21C107F0600611732 /* Sources */ = {
@@ -474,23 +551,27 @@
 		};
 		935F81D21C107F0700611732 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1EB6CEE278A513A9139D018F /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BlocSpot2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eric-ehamberlin.BlocSpot2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
 		};
 		935F81D31C107F0700611732 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0975E8404EBDC57675FA002A /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BlocSpot2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eric-ehamberlin.BlocSpot2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
@@ -561,6 +642,7 @@
 				935F81D31C107F0700611732 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		935F81D41C107F0700611732 /* Build configuration list for PBXNativeTarget "BlocSpot2Tests" */ = {
 			isa = XCConfigurationList;
@@ -569,6 +651,7 @@
 				935F81D61C107F0700611732 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		935F81D71C107F0700611732 /* Build configuration list for PBXNativeTarget "BlocSpot2UITests" */ = {
 			isa = XCConfigurationList;
@@ -577,6 +660,7 @@
 				935F81D91C107F0700611732 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

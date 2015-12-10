@@ -15,7 +15,7 @@ class PlacesDetailTableTableViewController: UITableViewController, NSFetchedResu
     
     let newPlace = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
-   var vcPlaces = [Places]()
+    var vcPlaces = [Places]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ class PlacesDetailTableTableViewController: UITableViewController, NSFetchedResu
         
         self.tableView.reloadData()
         
-        
+        print(self.vcPlaces.last)
     }
     
 
@@ -61,6 +61,7 @@ class PlacesDetailTableTableViewController: UITableViewController, NSFetchedResu
         cell.textLabel?.text = newPlace.name
         
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        
         
         print(newPlace.name)
         

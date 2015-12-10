@@ -8,6 +8,9 @@
 
 import UIKit
 import CoreData
+import MagicalRecord
+
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
         func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+            
+            [MagicalRecord setupCoreDataStack]
+            
             // Create Managed Object
             //let entityDescription = NSEntityDescription.entityForName("Places", inManagedObjectContext: self.managedObjectContext)
             //let newplace = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: self.managedObjectContext)

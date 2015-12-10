@@ -9,21 +9,46 @@
 import UIKit
 import MapKit
 import CoreLocation
+import CoreData
+
+//need 
+
+//start thinking about the opening screen
+
+//uisegmentedcontrol = + button on top all the time
+
+//have saved places show up on map
+
+//have tableview clickable
+
+//ability to add a notes page
+
+//custom table view cells
+
+//auto layout checks
 
 
 
 
-class ViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, CLLocationManagerDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate {
     
     
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBAction func showSearchBar(sender: AnyObject) {
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.hidesNavigationBarDuringPresentation = false
+        self.searchController.searchBar.delegate = self
+        presentViewController(searchController, animated: true, completion: nil)
+        }
+    
     var locationManager = CLLocationManager()
+    var places = Places!.self
     
     //starts map overlooking Pyrenees
     let initialLocation = CLLocation(latitude: 42.988566, longitude: 0.460573)
-    
     var searchController:UISearchController!
+    var annotation:MKAnnotation!
     var localSearchRequest:MKLocalSearchRequest!
     var localSearch:MKLocalSearch!
     var localSearchResponse:MKLocalSearchResponse!
@@ -33,6 +58,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, 
     var mapItemData:MKMapItem!
     
     var garonneOverlay:MKPolygon!
+    var placeSelected:String?
     
     
     
@@ -59,11 +85,14 @@ class ViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, 
         
         mapView.delegate = self
         
-       
+        //fetchAllPlaces()
         
         
     }
     
+    override func viewDidAppear(animated: Bool) {
+        print(placeSelected)
+    }
     let regionRadius: CLLocationDistance = 200000
     
     func centerMapOnLocation(location: CLLocation) {
@@ -73,8 +102,24 @@ class ViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, 
         mapView.showsCompass = true
         mapView.showsScale = true
     }
+    /*
+    func fetchAllPlaces() {
+      let oldPlace = Places.MR_importFromArray([AnyObject])
     
-    
+            // Create annotations for each one
+            for oldPlace in Places {
+                let aPlace = Places as Places
+                let coord = CLLocationCoordinate2D(latitude: Places.latitude, longitude: Places.longitude);
+                let placeAnnotation = placeAnnotation(coordinate: coord,
+                    title: Places.name,
+                    subtitle: Places.location)
+                    
+                mapView.addAnnotation(placeAnnotation)
+            }
+        }
+        
+    */
+   
    
     
     func action(gestureRecognizer:UIGestureRecognizer){
@@ -107,6 +152,40 @@ class ViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, 
         
         return annotationView
         
+    }
+    
+    //local search
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar){
+        //1
+        searchBar.resignFirstResponder()
+        dismissViewControllerAnimated(true, completion: nil)
+        if self.mapView.annotations.count != 0{
+            annotation = self.mapView.annotations[0]
+            self.mapView.removeAnnotation(annotation)
+        }
+        //2
+        localSearchRequest = MKLocalSearchRequest()
+        localSearchRequest.naturalLanguageQuery = searchBar.text
+        localSearch = MKLocalSearch(request: localSearchRequest)
+        localSearch.startWithCompletionHandler { (localSearchResponse, error) -> Void in
+            
+            if localSearchResponse == nil{
+                let alertController = UIAlertController(title: nil, message: "Place Not Found", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+                return
+            }
+            //3
+            self.pointAnnotation = MKPointAnnotation()
+            self.pointAnnotation.title = searchBar.text
+            self.pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: localSearchResponse!.boundingRegion.center.latitude, longitude:     localSearchResponse!.boundingRegion.center.longitude)
+            
+            
+            self.pinAnnotationView = MKPinAnnotationView(annotation: self.pointAnnotation, reuseIdentifier: nil)
+            self.mapView.centerCoordinate = self.pointAnnotation.coordinate
+            self.mapView.addAnnotation(self.pinAnnotationView.annotation!)
+        }
     }
     
 

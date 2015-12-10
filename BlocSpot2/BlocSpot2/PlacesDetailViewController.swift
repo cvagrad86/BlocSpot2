@@ -14,8 +14,9 @@ import CoreLocation
 
 
 
-class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
+class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,  UIPickerViewDelegate, UIPickerViewDataSource {
 
+    @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var detailMapView: MKMapView!
     @IBOutlet weak var placeLong: UILabel!
     @IBOutlet weak var placeLat: UILabel!
@@ -34,11 +35,11 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
     var inititalLocation:CLLocationCoordinate2D!
     var locationManager = CLLocationManager()
     
-
+    var pickerDataSource = ["Pyrénées Atlantique", "Haute Pyrenees", "Haute Garonne", "Ariege", "Andorra", "Pyrénées Orientales"];
     
-    @IBOutlet weak var notesLabel: UITextField!
+    //@IBOutlet weak var notesLabel: UITextField!
     @IBOutlet weak var nameLabel: UITextField!
-    @IBOutlet weak var locationLabel: UITextField!
+    //@IBOutlet weak var locationLabel: UITextField!
     
     
     override func viewDidLoad() {
@@ -70,6 +71,8 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
         placeLat.text = "Lat. \(placeLatitude)"
         placeLong.text = "Long. \(placeLongitude)"
         
+        self.pickerView.dataSource = self;
+        self.pickerView.delegate = self;
        
         if currentPlace.name == "" {
             title = "New Place"
@@ -103,6 +106,23 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
         
     }
     
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerDataSource.count;
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerDataSource[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView!, didSelectRow row: Int, inComponent component: Int)
+    {
+        currentPlace.location = "\(pickerDataSource[row])"
+    }
+    
 
     //want to get the map to center on the place chosen in previous window
     
@@ -123,11 +143,17 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
         if nameLabel.text != "" {
             //self.title       = nameLabel.text
             currentPlace.name = nameLabel.text!
-        currentPlace.location = locationLabel.text!
+        //currentPlace.location = pickerView.textInputContextIdentifier
+            
         currentPlace.longitude = placeLongitude
         currentPlace.latitude = placeLatitude
+            
        }
         
+        print(currentPlace.latitude)
+        print(currentPlace.longitude)
+        print(currentPlace.name)
+        print(currentPlace.location)
         
         
 }
@@ -139,8 +165,6 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
 
 extension PlacesDetailViewController: UITextFieldDelegate {
     
-    // MARK: Managing Editing
-    
     func textFieldDidEndEditing(textField: UITextField) {
         
         if textField.text != "" {
@@ -148,6 +172,6 @@ extension PlacesDetailViewController: UITextFieldDelegate {
             currentPlace.name = nameLabel.text!
         }
     }
-    //#####################################################################
+    
 }
 

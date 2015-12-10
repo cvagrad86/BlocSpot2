@@ -10,7 +10,11 @@ import UIKit
 import CoreData
 
 
-class PlacesDetailTableTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchBarDelegate, UISearchControllerDelegate {
+class PlacesDetailTableTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+    
+    
+    @IBOutlet weak var doneButton: UIBarButtonItem!
+    @IBOutlet weak var searchBar: UISearchBar!
 
     
     var places: [Places]!
@@ -26,6 +30,10 @@ class PlacesDetailTableTableViewController: UITableViewController, NSFetchedResu
         fetchAllPlaces()
         
         tableView.reloadData()
+    }
+    
+    func saveContext() {
+        NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
     }
     
     func fetchAllPlaces() {
@@ -46,6 +54,7 @@ class PlacesDetailTableTableViewController: UITableViewController, NSFetchedResu
         super.didReceiveMemoryWarning()
     }
 
+ 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -56,8 +65,7 @@ class PlacesDetailTableTableViewController: UITableViewController, NSFetchedResu
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        //return vcPlaces.count
+
         return places.count
     }
     
@@ -67,61 +75,105 @@ class PlacesDetailTableTableViewController: UITableViewController, NSFetchedResu
             reuseIdentifier: "placeCell")
         
         
-        
         let currentplace = places[indexPath.row]
         cell.textLabel?.text = currentplace.name
         cell.detailTextLabel?.text = currentplace.location
-        
-       
-        
         return cell
 
     }
     
-  
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        performSegueWithIdentifier("seeDetails", sender: self)
     }
-    */
-
-    /*
-    // Override to support editing the table view.
+    
+    //Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        
+        if (editingStyle == .Delete) {
+
+            places.removeAtIndex(indexPath.row).MR_deleteEntity()
+            saveContext()
+            
+            let indexPaths = [indexPath]
+            
+            tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
+            
+            tableView.reloadData()
         }    
+    
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     
     // MARK: - Navigation
-
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        let controller = segue.destinationViewController as! ViewController
+        
+        if segue.identifier == "seeDetails" {
+            
+            let indexPath = tableView.indexPathForSelectedRow
+            
+            let placeSelected = places[indexPath!.row].name
+            
+            controller.placeSelected = placeSelected
+            
+            
+        }
     }
     
 
+}
+
+extension PlacesDetailTableTableViewController: UISearchBarDelegate {
+    
+    // MARK: Editing Text
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchBar.text != "" {
+            performSearch()
+            
+        } else {
+            fetchAllPlaces()
+            tableView.reloadData()
+        }
+    }
+    //#####################################################################
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    //#####################################################################
+    // MARK: Clicking Buttons
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
+        searchBar.showsCancelButton = false
+        fetchAllPlaces()
+        tableView.reloadData()
+    }
+    //#####################################################################
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        // This method is invoked when the user taps the Search button on the keyboard.
+        
+        searchBar.resignFirstResponder()
+        performSearch()
+    }
+    //#####################################################################
+    // MARK: Helper Methods
+    
+    func performSearch() {
+        
+        let searchText = searchBar.text
+        let filterCriteria = NSPredicate(format: "name contains[c] %@", searchText!)
+        
+        places = Places.MR_findAllSortedBy(sortKeyName, ascending: true,
+            withPredicate: filterCriteria,
+            inContext: NSManagedObjectContext.MR_defaultContext()) as? [Places]
+        tableView.reloadData()
+}
 }

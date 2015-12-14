@@ -61,15 +61,15 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
         
         let dropPin = MKPointAnnotation()
         dropPin.coordinate = CLLocationCoordinate2DMake(self.placeLatitude, self.placeLongitude)
-        dropPin.title = "NewPlace"
+        dropPin.title = "Lat. \(placeLatitude)"
         detailMapView.addAnnotation(dropPin)
         detailMapView.delegate = self
         
         print(placeLatitude)
         print(placeLongitude)
         
-        placeLat.text = "Lat. \(placeLatitude)"
-        placeLong.text = "Long. \(placeLongitude)"
+        //placeLat.text = "Lat. \(placeLatitude)"
+        //placeLong.text = "Long. \(placeLongitude)"
         
         self.pickerView.dataSource = self;
         self.pickerView.delegate = self;
@@ -141,10 +141,7 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
         
         //when this is clicked, it saves this data AND the lat and long data as Core Data
         if nameLabel.text != "" {
-            //self.title       = nameLabel.text
-            currentPlace.name = nameLabel.text!
-        //currentPlace.location = pickerView.textInputContextIdentifier
-            
+        currentPlace.name = nameLabel.text!
         currentPlace.longitude = placeLongitude
         currentPlace.latitude = placeLatitude
             
@@ -154,7 +151,6 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
         print(currentPlace.longitude)
         print(currentPlace.name)
         print(currentPlace.location)
-        
         
 }
 

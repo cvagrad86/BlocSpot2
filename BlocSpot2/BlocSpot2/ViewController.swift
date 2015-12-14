@@ -72,6 +72,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -90,9 +91,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
     }
     
-    override func viewDidAppear(animated: Bool) {
-        print(placeSelected)
-    }
+   // override func viewDidAppear(animated: Bool) {
+        //print(placeSelected)
+       // let newCoordinate: CLLocationCoordinate2D =
+       // self.pointAnnotation = MKPointAnnotation()
+        
+    //}
     let regionRadius: CLLocationDistance = 200000
     
     func centerMapOnLocation(location: CLLocation) {
@@ -192,9 +196,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
+        
         if(segue.identifier == "PinDetails") {
+            let nav = segue.destinationViewController as! UINavigationController
+            let yourNextViewController = nav.topViewController as! PlacesDetailViewController
             
-            let yourNextViewController = segue.destinationViewController as! PlacesDetailViewController
+            //let  = segue.destinationViewController as! PlacesDetailViewController
             
                 yourNextViewController.placeLatitude = (pointAnnotation.coordinate.latitude)
                 yourNextViewController.placeLongitude = (pointAnnotation.coordinate.longitude)

@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5BA92C18E42537B6A6590165 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55501AFA07FD7932B99CB24B /* libPods.a */; };
+		1A456502C08431B0F692BCAB /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0AF09B88ECD7AD24D04624 /* Pods.framework */; };
+		9342E4D31C1B1C13002C7F1D /* PlacesDetailNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9342E4D21C1B1C13002C7F1D /* PlacesDetailNotesViewController.swift */; };
 		935F81AA1C107F0600611732 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F81A91C107F0600611732 /* AppDelegate.swift */; };
 		935F81AC1C107F0600611732 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F81AB1C107F0600611732 /* ViewController.swift */; };
 		935F81AF1C107F0700611732 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 935F81AD1C107F0700611732 /* Main.storyboard */; };
@@ -25,6 +26,10 @@
 		935F81EC1C10A8CE00611732 /* Places+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F81E81C10A8CE00611732 /* Places+CoreDataProperties.swift */; };
 		935F81ED1C10A8CE00611732 /* Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F81E91C10A8CE00611732 /* Places.swift */; };
 		935F81EF1C1497C800611732 /* PlacesDetailTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F81EE1C1497C800611732 /* PlacesDetailTableTableViewController.swift */; };
+		939810B31C1D7A5F001A9831 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 939810B11C1D7A5F001A9831 /* Fabric.framework */; };
+		939810B41C1D7A5F001A9831 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 939810B21C1D7A5F001A9831 /* Crashlytics.framework */; };
+		939810D41C1ED1A0001A9831 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939810D31C1ED1A0001A9831 /* MapViewController.swift */; };
+		939810D61C1F0908001A9831 /* OpeningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939810D51C1F0908001A9831 /* OpeningViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +52,7 @@
 /* Begin PBXFileReference section */
 		0975E8404EBDC57675FA002A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		1EB6CEE278A513A9139D018F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		55501AFA07FD7932B99CB24B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9342E4D21C1B1C13002C7F1D /* PlacesDetailNotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesDetailNotesViewController.swift; sourceTree = "<group>"; };
 		935F81A61C107F0600611732 /* BlocSpot2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlocSpot2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		935F81A91C107F0600611732 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		935F81AB1C107F0600611732 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -71,7 +76,12 @@
 		935F81E81C10A8CE00611732 /* Places+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Places+CoreDataProperties.swift"; path = "../Places+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		935F81E91C10A8CE00611732 /* Places.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Places.swift; path = ../Places.swift; sourceTree = "<group>"; };
 		935F81EE1C1497C800611732 /* PlacesDetailTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesDetailTableTableViewController.swift; sourceTree = "<group>"; };
+		939810B11C1D7A5F001A9831 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		939810B21C1D7A5F001A9831 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		939810D31C1ED1A0001A9831 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		939810D51C1F0908001A9831 /* OpeningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpeningViewController.swift; sourceTree = "<group>"; };
 		93D6B0E71C18060E00817C36 /* BlocSpot2-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BlocSpot2-Bridging-Header.h"; sourceTree = "<group>"; };
+		9D0AF09B88ECD7AD24D04624 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,9 +90,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				935F81DF1C107F4900611732 /* CoreData.framework in Frameworks */,
+				939810B31C1D7A5F001A9831 /* Fabric.framework in Frameworks */,
 				935F81DD1C107F4200611732 /* CoreLocation.framework in Frameworks */,
 				935F81DB1C107F2100611732 /* MapKit.framework in Frameworks */,
-				5BA92C18E42537B6A6590165 /* libPods.a in Frameworks */,
+				939810B41C1D7A5F001A9831 /* Crashlytics.framework in Frameworks */,
+				1A456502C08431B0F692BCAB /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,7 +118,7 @@
 		39C7B52C67F390355416435B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				55501AFA07FD7932B99CB24B /* libPods.a */,
+				9D0AF09B88ECD7AD24D04624 /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -123,6 +135,8 @@
 		935F819D1C107F0600611732 = {
 			isa = PBXGroup;
 			children = (
+				939810B11C1D7A5F001A9831 /* Fabric.framework */,
+				939810B21C1D7A5F001A9831 /* Crashlytics.framework */,
 				935F81DE1C107F4900611732 /* CoreData.framework */,
 				935F81DC1C107F4200611732 /* CoreLocation.framework */,
 				935F81DA1C107F2100611732 /* MapKit.framework */,
@@ -212,6 +226,9 @@
 				935F81E41C1080B000611732 /* PlacesDetailViewController.swift */,
 				935F81EE1C1497C800611732 /* PlacesDetailTableTableViewController.swift */,
 				935F81AB1C107F0600611732 /* ViewController.swift */,
+				9342E4D21C1B1C13002C7F1D /* PlacesDetailNotesViewController.swift */,
+				939810D31C1ED1A0001A9831 /* MapViewController.swift */,
+				939810D51C1F0908001A9831 /* OpeningViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -229,6 +246,7 @@
 				935F81A41C107F0600611732 /* Resources */,
 				555F3B05DF76115E3DED30CE /* Embed Pods Frameworks */,
 				BBE03DB74FAE769063004DCB /* Copy Pods Resources */,
+				939810B01C1D79E7001A9831 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -381,6 +399,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		939810B01C1D79E7001A9831 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 37e8d434de3937f8ef9d346d9e37c13979bea91b 695a21e17022423b78c839f64cf2fb85e5f6d59b38b5bd1f4dea9b26dbab6e94\n";
+		};
 		BBE03DB74FAE769063004DCB /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -403,11 +434,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				939810D41C1ED1A0001A9831 /* MapViewController.swift in Sources */,
+				939810D61C1F0908001A9831 /* OpeningViewController.swift in Sources */,
 				935F81EA1C10A8CE00611732 /* PlacesDetails+CoreDataProperties.swift in Sources */,
 				935F81EC1C10A8CE00611732 /* Places+CoreDataProperties.swift in Sources */,
 				935F81EF1C1497C800611732 /* PlacesDetailTableTableViewController.swift in Sources */,
 				935F81AC1C107F0600611732 /* ViewController.swift in Sources */,
 				935F81B21C107F0700611732 /* BlocSpot2.xcdatamodeld in Sources */,
+				9342E4D31C1B1C13002C7F1D /* PlacesDetailNotesViewController.swift in Sources */,
 				935F81E51C1080B000611732 /* PlacesDetailViewController.swift in Sources */,
 				935F81EB1C10A8CE00611732 /* PlacesDetails.swift in Sources */,
 				935F81AA1C107F0600611732 /* AppDelegate.swift in Sources */,
@@ -555,6 +589,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = BlocSpot2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eric-ehamberlin.BlocSpot2";
@@ -570,6 +608,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = BlocSpot2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eric-ehamberlin.BlocSpot2";

@@ -8,17 +8,19 @@
 
 import UIKit
 import CoreData
+import MapKit
 
 
 class PlacesDetailTableTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     
-    @IBOutlet weak var doneButton: UIBarButtonItem!
+  
     @IBOutlet weak var searchBar: UISearchBar!
 
+  
     
     var places: [Places]!
-    
+    //var placesMap: MKMapView!
     let sortKeyName   = "name"
     let sortKeyRating = "beerDetails.rating"
     let wbSortKey     = "wbSortKey"
@@ -78,14 +80,19 @@ class PlacesDetailTableTableViewController: UITableViewController, NSFetchedResu
         let currentplace = places[indexPath.row]
         cell.textLabel?.text = currentplace.name
         cell.detailTextLabel?.text = currentplace.location
+        
+        
         return cell
 
     }
+
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("seeDetails", sender: self)
+        performSegueWithIdentifier("viewPlace", sender: self)
+        
     }
     
+   
     //Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -108,17 +115,28 @@ class PlacesDetailTableTableViewController: UITableViewController, NSFetchedResu
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        let controller = segue.destinationViewController as! ViewController
+        let nav = segue.destinationViewController as! UINavigationController
+        let controller = nav.topViewController as! PlacesDetailNotesViewController
         
-        if segue.identifier == "seeDetails" {
+        
+        //let addEventViewController = nav.topViewController as! AddEventViewController
+        
+        if segue.identifier == "viewPlace" {
             
             let indexPath = tableView.indexPathForSelectedRow
             
             let placeSelected = places[indexPath!.row].name
+            let placeLocation = places[indexPath!.row].location
+            let placeLong = places[indexPath!.row].longitude
+           let placeLat = places[indexPath!.row].latitude
             
             controller.placeSelected = placeSelected
+            controller.placeLocation = placeLocation
+            controller.placeLongitude = placeLong?.doubleValue
+            controller.placeLatitude = placeLat?.doubleValue
+
             
-            
+        
         }
     }
     

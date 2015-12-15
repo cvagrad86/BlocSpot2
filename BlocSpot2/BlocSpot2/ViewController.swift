@@ -13,21 +13,19 @@ import CoreData
 
 //need 
 
-//start thinking about the opening screen
+//start thinking about the opening screen - on its way
 
 //uisegmentedcontrol = + button on top all the time
 
-//have saved places show up on map
+//have saved places show up on map - still need, table is set...
 
-//have tableview clickable
+//have tableview clickable - was working...
 
-//ability to add a notes page
+//ability to add a notes page - on its way
 
 //custom table view cells
 
-//auto layout checks
-
-
+//auto layout checks - started using some stack views
 
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate {
@@ -43,6 +41,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     
     var locationManager = CLLocationManager()
+    
     var places = Places!.self
     
     //starts map overlooking Pyrenees
@@ -57,7 +56,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var pinAnnotationView:MKPinAnnotationView!
     var mapItemData:MKMapItem!
     
-    var garonneOverlay:MKPolygon!
     var placeSelected:String?
     
     
@@ -85,8 +83,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         mapView.addGestureRecognizer(addSpot)
         
         mapView.delegate = self
+        mapView.showsUserLocation = true
         
-        //fetchAllPlaces()
         
         
     }
@@ -106,26 +104,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         mapView.showsCompass = true
         mapView.showsScale = true
     }
-    /*
-    func fetchAllPlaces() {
-      let oldPlace = Places.MR_importFromArray([AnyObject])
-    
-            // Create annotations for each one
-            for oldPlace in Places {
-                let aPlace = Places as Places
-                let coord = CLLocationCoordinate2D(latitude: Places.latitude, longitude: Places.longitude);
-                let placeAnnotation = placeAnnotation(coordinate: coord,
-                    title: Places.name,
-                    subtitle: Places.location)
-                    
-                mapView.addAnnotation(placeAnnotation)
-            }
-        }
-        
-    */
-   
-   
-    
+
     func action(gestureRecognizer:UIGestureRecognizer){
         if gestureRecognizer.state == UIGestureRecognizerState.Began {
             let touchPoint = gestureRecognizer.locationInView(mapView)
@@ -142,8 +121,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        
-        
+    
         let identifier = "PinDetails"
         var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
         annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)

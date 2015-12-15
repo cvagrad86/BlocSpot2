@@ -16,11 +16,10 @@ class PlacesDetailTableTableViewController: UITableViewController, NSFetchedResu
     
   
     @IBOutlet weak var searchBar: UISearchBar!
-
-  
     
     var places: [Places]!
-    //var placesMap: MKMapView!
+    
+    
     let sortKeyName   = "name"
     let sortKeyRating = "beerDetails.rating"
     let wbSortKey     = "wbSortKey"
@@ -40,14 +39,10 @@ class PlacesDetailTableTableViewController: UITableViewController, NSFetchedResu
     
     func fetchAllPlaces() {
         
-        // Retrieve the current sort key.
         let sortKey = NSUserDefaults.standardUserDefaults().objectForKey(wbSortKey) as? String
         
-        // Do not sort in ascending order if sorting by rating (i.e., sort descending).
-        // Otherwise (i.e. sorting alphabetically), sort in ascending order.
         let ascending = (sortKey == sortKeyRating) ? false : true
         
-        // Fetch records from Entity Beer using a MagicalRecord method.
         places = Places.MR_findAllSortedBy(sortKey, ascending: ascending) as! [Places]
     }
 
@@ -56,13 +51,11 @@ class PlacesDetailTableTableViewController: UITableViewController, NSFetchedResu
         super.didReceiveMemoryWarning()
     }
 
- 
-    // MARK: - Table view data source
+
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        //possibly default this to show the various locations automatically based on valley?
-        
+        //possibly default this to show the various locations automatically based on valley
         return 1
     }
 
@@ -76,11 +69,9 @@ class PlacesDetailTableTableViewController: UITableViewController, NSFetchedResu
         let cell = self.tableView.dequeueReusableCellWithIdentifier("placeCell", forIndexPath: indexPath) as? UITableViewCell ?? UITableViewCell(style: .Subtitle,
             reuseIdentifier: "placeCell")
         
-        
         let currentplace = places[indexPath.row]
         cell.textLabel?.text = currentplace.name
         cell.detailTextLabel?.text = currentplace.location
-        
         
         return cell
 

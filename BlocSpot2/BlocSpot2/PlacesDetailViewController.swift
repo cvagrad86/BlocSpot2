@@ -18,14 +18,10 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
 
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var detailMapView: MKMapView!
-    @IBOutlet weak var placeLong: UILabel!
-    @IBOutlet weak var placeLat: UILabel!
+   
     
     var currentPlace: Places!
-    
-    //var newPlace = [NSManagedObject]()
-    
-    //let newPlace = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    //var plDetails: PlacesDetails!
     var placeLongitude = Double()
     var placeLatitude = Double()
     var pointAnnotation:MKPointAnnotation!
@@ -46,14 +42,15 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
         super.viewDidLoad()
         
         if let place = currentPlace {
-            // A place exists.  EDIT Mode.
-            
         } else {
-            // A place does NOT exist.  ADD Mode.
-            
             currentPlace = Places.MR_createEntity() as Places
             currentPlace.name = ""
         }
+        //if let date = plDetails {
+        //} else {
+           // plDetails = PlacesDetails.MR_createEntity() as PlacesDetails
+            //plDetails.date = NSDate
+       // }
         
         let startingLocation = CLLocationCoordinate2DMake(self.placeLatitude, self.placeLongitude)
         
@@ -64,12 +61,6 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
         dropPin.title = "Lat. \(placeLatitude)"
         detailMapView.addAnnotation(dropPin)
         detailMapView.delegate = self
-        
-        print(placeLatitude)
-        print(placeLongitude)
-        
-        //placeLat.text = "Lat. \(placeLatitude)"
-        //placeLong.text = "Long. \(placeLongitude)"
         
         self.pickerView.dataSource = self;
         self.pickerView.delegate = self;
@@ -86,10 +77,7 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
         
         super.viewWillDisappear(true)
         
-        //------------------------------------------
-        
         nameLabel.resignFirstResponder()
-        
         
         saveContext()
         
@@ -145,12 +133,15 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
         currentPlace.longitude = placeLongitude
         currentPlace.latitude = placeLatitude
             
+        //let date = NSDate()
+        //let calendar = NSCalendar.currentCalendar()
+            
+        //plDetails.date = date
+            
+        //print(plDetails.date)
+           
        }
         
-        print(currentPlace.latitude)
-        print(currentPlace.longitude)
-        print(currentPlace.name)
-        print(currentPlace.location)
         
 }
 

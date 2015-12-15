@@ -19,7 +19,10 @@ class PlacesDetailNotesViewController: UIViewController, MKMapViewDelegate,CLLoc
     @IBOutlet weak var placeLongitudeLabel: UILabel!
     @IBOutlet weak var placeLatitudeLabel : UILabel!
     
+    @IBOutlet weak var placeNotes: UITextView!
+    
     var places: [Places]!
+    
     var placeSelected:String?
     var placeLocation: String?
     var placeLongitude: Double!
@@ -41,6 +44,7 @@ class PlacesDetailNotesViewController: UIViewController, MKMapViewDelegate,CLLoc
         super.viewDidLoad()
         
         fetchAllPlaces()
+        //fetchAllNotes()
         
         placeLabel.text = placeSelected
         placeLocationLabel.text = placeLocation
@@ -58,6 +62,18 @@ class PlacesDetailNotesViewController: UIViewController, MKMapViewDelegate,CLLoc
         
         placeMapView.addAnnotation(dropPin)
         placeMapView.delegate = self
+        /*
+        if let notes = plNotes {
+            placeNotes.text = plNotes.notes
+        } else {
+            plNotes = PlacesDetails.MR_createEntity() as PlacesDetails
+            plNotes.notes = ""
+        }
+*/
+        
+        
+
+        
         
     }
     
@@ -72,6 +88,47 @@ class PlacesDetailNotesViewController: UIViewController, MKMapViewDelegate,CLLoc
     
     }
     
+    @IBAction func addNotes(sender: UIButton) {
+        
+        var inputTextField: UITextField?
+        
+        let alertController = UIAlertController(title: "Title", message: "Message", preferredStyle: .Alert)
+        let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+            // Do whatever you want with inputTextField?.text
+            print("\(inputTextField?.text)")
+            self.placeNotes.text = inputTextField?.text
+            
+        })
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in }
+        
+        alertController.addAction(ok)
+        alertController.addAction(cancel)
+        
+        alertController.addTextFieldWithConfigurationHandler { (textField) -> Void in
+            inputTextField = textField
+        } 
+        
+        
+        //plNotes.notes = inputTextField?.text
+        
+        
+        presentViewController(alertController, animated: true, completion: nil)
+            
+        }
+
+    
+    @IBAction func saveNotes(sender: UIButton) {
+      
+       
+        //crashed - self.placeNotes.text = self.plNotes.notes
+        //crashed - self.placeNotes.text = plNotes.notes
+        //crashed - placeNotes.text = plNotes.notes
+       
+        
+    }
+
+   
+    
     func fetchAllPlaces() {
         
         // Retrieve the current sort key.
@@ -84,10 +141,23 @@ class PlacesDetailNotesViewController: UIViewController, MKMapViewDelegate,CLLoc
         // Fetch records from Entity Beer using a MagicalRecord method.
         places = Places.MR_findAllSortedBy(sortKey, ascending: ascending) as! [Places]
         
-        print(places.description)
+        
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        
+        super.viewWillDisappear(true)
+        
+        saveContext()
+    
+    }
+    
+    func saveContext() {
+        NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
     }
 
     
     
-}
 
+
+}

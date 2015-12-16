@@ -115,7 +115,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             pointAnnotation.subtitle = "click i to add details"
             let pinAnnotationView = MKPinAnnotationView(annotation: pointAnnotation, reuseIdentifier: nil)
             self.mapView.addAnnotation(pinAnnotationView.annotation!)
-            print(pointAnnotation.coordinate)
+            //print(pointAnnotation.coordinate)
             
         }
     }

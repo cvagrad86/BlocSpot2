@@ -15,6 +15,7 @@ import CoreData
 
 //@objc(Places)
 
+
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate  {
     
     @IBOutlet weak var placesMapView: MKMapView!
@@ -23,52 +24,40 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var allPlacesLong: Double!
     var allPlacesLat: Double!
     
+    let sortKeyName   = "name"
+    let sortKeyRating = "beerDetails.rating"
+    let wbSortKey     = "wbSortKey"
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //var locations = [Places].self
-        /*
-        var annotations = [MKPointAnnotation]()
+        fetchAllPlaces()
         
-        for dictionary in allPlaces {
-            let latitude = CLLocationCoordinate2D.self
-            let longitude = CLLocationCoordinate2D.self
-            let coordinate = CLLocationCoordinate2D.self
-            let name = "name" as String
-            let annotation = MKPointAnnotation()
-            //annotation.coordinate = coordinate
-            annotation.title = "\(name)"
-            annotations.append(annotation)
+        for newPlace in 1...allPlaces.count {
+            print("\(allPlaces.count)")
             
-            placesMapView.addAnnotations(annotations)
+            
         }
         
-        */
-    }
+        
+}
     
    // override func viewDidAppear(animated: Bool) {
         
          //mapViewWillStartLoadingMap(placesMapView)
    // }
-    /*
-    func showAllPlaces(){
-        var newplaces = Places.MR_findAll()
+
+    func fetchAllPlaces() {
         
-        for index in 0..<newplaces.count{
-            var lat = Double(allPlaces[index].latitude!)
-            var long = Double(allPlaces[index].longitude!)
-            let location:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: Double((lat as! NSString).doubleValue), longitude: Double((long as! NSString).doubleValue))
-            var newAnotation = MKPointAnnotation()
-            newAnotation.coordinate = location
-            newAnotation.title = "place"
-            placesMapView.addAnnotation(newAnotation)
-            
-           print("Places \(newplaces.count)")
-            print("map loaded")
-        }
+        let sortKey = NSUserDefaults.standardUserDefaults().objectForKey(wbSortKey) as? String
+        
+        let ascending = (sortKey == sortKeyRating) ? false : true
+        
+        allPlaces = Places.MR_findAllSortedBy(sortKey, ascending: ascending) as! [Places]
     }
-    */
+
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseIdentifier = "pin"

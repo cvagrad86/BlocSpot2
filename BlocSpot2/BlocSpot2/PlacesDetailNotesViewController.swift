@@ -11,8 +11,9 @@ import MapKit
 import CoreLocation
 
 
-class PlacesDetailNotesViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDelegate {
+class PlacesDetailNotesViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDelegate, UIImagePickerControllerDelegate {
 
+    //@IBOutlet weak var myImageView: UIImageView!
     @IBOutlet weak var placeLabel: UILabel!
     @IBOutlet weak var placeLocationLabel: UILabel!
     @IBOutlet weak var placeMapView: MKMapView!
@@ -22,6 +23,7 @@ class PlacesDetailNotesViewController: UIViewController, MKMapViewDelegate,CLLoc
     @IBOutlet weak var placeNotes: UITextView!
     
     var places: [Places]!
+    var plNotes: [PlacesDetails]!
     
     var placeSelected:String?
     var placeLocation: String?
@@ -33,6 +35,7 @@ class PlacesDetailNotesViewController: UIViewController, MKMapViewDelegate,CLLoc
     var savedAnnotation:MKAnnotation!
     var inititalLocation:CLLocationCoordinate2D!
     var locationManager = CLLocationManager()
+    //let picker = UIImagePickerController()
     
     let sortKeyName   = "name"
     let sortKeyRating = "beerDetails.rating"
@@ -42,6 +45,8 @@ class PlacesDetailNotesViewController: UIViewController, MKMapViewDelegate,CLLoc
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        //picker.delegate=self
         
         fetchAllPlaces()
         //fetchAllNotes()
@@ -87,12 +92,83 @@ class PlacesDetailNotesViewController: UIViewController, MKMapViewDelegate,CLLoc
         placeMapView.showsScale = true
     
     }
+    /*
+    @IBAction func addPhotos(sender: UIBarButtonItem) {
+        picker.allowsEditing = false //2
+        picker.sourceType = .PhotoLibrary //3
+        picker.modalPresentationStyle = .Popover
+        presentViewController(picker,
+            animated: true,
+            completion: nil)//4
+        picker.popoverPresentationController?.barButtonItem = sender
+        
+    }
     
+    @IBAction func takePhotos(sender: UIBarButtonItem) {
+        if UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil {
+            picker.allowsEditing = false
+            picker.sourceType = UIImagePickerControllerSourceType.Camera
+            picker.cameraCaptureMode = .Photo
+            picker.modalPresentationStyle = .FullScreen
+            presentViewController(picker,
+                animated: true,
+                completion: nil)
+        } else {
+            noCamera()
+        }
+        
+    }
+
+    func noCamera(){
+        let alertVC = UIAlertController(
+            title: "No Camera",
+            message: "Sorry, this device has no camera",
+            preferredStyle: .Alert)
+        let okAction = UIAlertAction(
+            title: "OK",
+            style:.Default,
+            handler: nil)
+        alertVC.addAction(okAction)
+        presentViewController(
+            alertVC,
+            animated: true,
+            completion: nil)
+    }
+    
+    func imagePickerController(
+        picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [String : AnyObject])
+    {
+        var chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
+        myImageView.contentMode = .ScaleAspectFit //3
+        myImageView.image = chosenImage //4
+        dismissViewControllerAnimated(true, completion: nil) //5
+    }
+    //What to do if the image picker cancels.
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true,
+            completion: nil)
+    }
+
+*/
+    
+    @IBAction func shareNote(sender: UIBarButtonItem) {
+        
+        let vc = UIActivityViewController(activityItems: [places], applicationActivities: [])
+        presentViewController(vc, animated: true, completion: nil)
+    
+    }
+    
+    @IBAction func saveNotes(sender: UIBarButtonItem) {
+        
+        
+    }
+   
     @IBAction func addNotes(sender: UIButton) {
         
         var inputTextField: UITextField?
         
-        let alertController = UIAlertController(title: "Title", message: "Message", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "Add Notes", message: "Weather, animals, etc", preferredStyle: .Alert)
         let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
             // Do whatever you want with inputTextField?.text
             print("\(inputTextField?.text)")
@@ -106,48 +182,30 @@ class PlacesDetailNotesViewController: UIViewController, MKMapViewDelegate,CLLoc
         
         alertController.addTextFieldWithConfigurationHandler { (textField) -> Void in
             inputTextField = textField
-        } 
-        
-        
-        //plNotes.notes = inputTextField?.text
-        
+        }
         
         presentViewController(alertController, animated: true, completion: nil)
             
         }
 
     
-    @IBAction func saveNotes(sender: UIButton) {
-      
-       
-        //crashed - self.placeNotes.text = self.plNotes.notes
-        //crashed - self.placeNotes.text = plNotes.notes
-        //crashed - placeNotes.text = plNotes.notes
-       
-        
-    }
+  
 
    
     
     func fetchAllPlaces() {
         
-        // Retrieve the current sort key.
         let sortKey = NSUserDefaults.standardUserDefaults().objectForKey(wbSortKey) as? String
-        
-        // Do not sort in ascending order if sorting by rating (i.e., sort descending).
-        // Otherwise (i.e. sorting alphabetically), sort in ascending order.
+
         let ascending = (sortKey == sortKeyRating) ? false : true
         
-        // Fetch records from Entity Beer using a MagicalRecord method.
         places = Places.MR_findAllSortedBy(sortKey, ascending: ascending) as! [Places]
         
         
     }
     
     override func viewWillDisappear(animated: Bool) {
-        
         super.viewWillDisappear(true)
-        
         saveContext()
     
     }

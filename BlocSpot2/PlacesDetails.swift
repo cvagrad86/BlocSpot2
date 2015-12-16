@@ -9,11 +9,10 @@
 import Foundation
 import CoreData
 
-//@objc(PlacesDetails)
+
 
 class PlacesDetails: NSManagedObject {
 
-// Insert code here to add functionality to your managed object subclass
 
     @NSManaged var notes: String?
     @NSManaged var date: NSDate?

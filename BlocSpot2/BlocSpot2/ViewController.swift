@@ -33,16 +33,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     @IBOutlet weak var mapView: MKMapView!
     
-    @IBAction func showSearchBar(sender: AnyObject) {
-        searchController = UISearchController(searchResultsController: nil)
-        searchController.hidesNavigationBarDuringPresentation = false
-        self.searchController.searchBar.delegate = self
-        presentViewController(searchController, animated: true, completion: nil)
-        }
+    
     
     var locationManager = CLLocationManager()
     
-    var places = Places!.self
+    //var places = Places!.self
     
     //starts map overlooking Pyrenees
     let initialLocation = CLLocation(latitude: 42.988566, longitude: 0.460573)
@@ -61,40 +56,71 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     
     // MARK: - location manager to authorize user location for Maps app
-    
+    /*
     func checkLocationAuthorizationStatus() {
         if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
             mapView.showsUserLocation = true
+            locationManager.startUpdatingLocation()
         } else {
             locationManager.requestWhenInUseAuthorization()
         }
     }
-    
+    */
    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         centerMapOnLocation(initialLocation)
-        checkLocationAuthorizationStatus()
+        //checkLocationAuthorizationStatus()
         
+       
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+        
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
+        self.mapView.showsUserLocation = true
         
         let addSpot = UILongPressGestureRecognizer(target: self, action: "action:")
         addSpot.minimumPressDuration = 1
         mapView.addGestureRecognizer(addSpot)
-        
         mapView.delegate = self
-        mapView.showsUserLocation = true
         
+       
+    }
+   
+    
+    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        mapView.showsUserLocation = (status == .AuthorizedAlways)
+    }
+  
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    {
+        let location = locations.last
         
+        let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
         
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
+        
+        self.mapView.setRegion(region, animated: true)
+        
+        self.locationManager.stopUpdatingLocation()
     }
     
-   // override func viewDidAppear(animated: Bool) {
-        //print(placeSelected)
-       // let newCoordinate: CLLocationCoordinate2D =
-       // self.pointAnnotation = MKPointAnnotation()
-        
-    //}
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError)
+    {
+        print("Errors: " + error.localizedDescription)
+    }
+
+    
+    
+    
+    
     let regionRadius: CLLocationDistance = 200000
     
     func centerMapOnLocation(location: CLLocation) {

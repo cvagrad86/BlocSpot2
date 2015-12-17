@@ -11,9 +11,9 @@ import MapKit
 import CoreLocation
 
 
-class PlacesDetailNotesViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDelegate, UIImagePickerControllerDelegate {
+class PlacesDetailNotesViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    //@IBOutlet weak var myImageView: UIImageView!
+    @IBOutlet weak var myImageView: UIImageView!
     @IBOutlet weak var placeLabel: UILabel!
     @IBOutlet weak var placeLocationLabel: UILabel!
     @IBOutlet weak var placeMapView: MKMapView!
@@ -29,13 +29,14 @@ class PlacesDetailNotesViewController: UIViewController, MKMapViewDelegate,CLLoc
     var placeLocation: String?
     var placeLongitude: Double!
     var placeLatitude: Double!
+    var newPlaceNotes:String?
     var pointAnnotation:MKPointAnnotation!
     var pinAnnotationView:MKPinAnnotationView!
     var mapItemData:MKMapItem!
     var savedAnnotation:MKAnnotation!
     var inititalLocation:CLLocationCoordinate2D!
     var locationManager = CLLocationManager()
-    //let picker = UIImagePickerController()
+    
     
     let sortKeyName   = "name"
     let sortKeyRating = "beerDetails.rating"
@@ -45,8 +46,6 @@ class PlacesDetailNotesViewController: UIViewController, MKMapViewDelegate,CLLoc
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        //picker.delegate=self
         
         fetchAllPlaces()
         //fetchAllNotes()
@@ -67,18 +66,15 @@ class PlacesDetailNotesViewController: UIViewController, MKMapViewDelegate,CLLoc
         
         placeMapView.addAnnotation(dropPin)
         placeMapView.delegate = self
-        /*
-        if let notes = plNotes {
-            placeNotes.text = plNotes.notes
-        } else {
-            plNotes = PlacesDetails.MR_createEntity() as PlacesDetails
-            plNotes.notes = ""
-        }
-*/
         
-        
+        //if let notes = plNotes {
+          //  placeNotes.text = plNotes.
+        //} else {
+           // plNotes = PlacesDetails.MR_createEntity() as PlacesDetails
+            //plNotes.notes = ""
+        //}
 
-        
+
         
     }
     
@@ -92,12 +88,15 @@ class PlacesDetailNotesViewController: UIViewController, MKMapViewDelegate,CLLoc
         placeMapView.showsScale = true
     
     }
-    /*
+    
     @IBAction func addPhotos(sender: UIBarButtonItem) {
+        
+        let picker = UIImagePickerController()
+        picker.delegate=self
         picker.allowsEditing = false //2
         picker.sourceType = .PhotoLibrary //3
         picker.modalPresentationStyle = .Popover
-        presentViewController(picker,
+        self.presentViewController(picker,
             animated: true,
             completion: nil)//4
         picker.popoverPresentationController?.barButtonItem = sender
@@ -106,6 +105,8 @@ class PlacesDetailNotesViewController: UIViewController, MKMapViewDelegate,CLLoc
     
     @IBAction func takePhotos(sender: UIBarButtonItem) {
         if UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil {
+            let picker = UIImagePickerController()
+            picker.delegate=self
             picker.allowsEditing = false
             picker.sourceType = UIImagePickerControllerSourceType.Camera
             picker.cameraCaptureMode = .Photo
@@ -150,7 +151,7 @@ class PlacesDetailNotesViewController: UIViewController, MKMapViewDelegate,CLLoc
             completion: nil)
     }
 
-*/
+
     
     @IBAction func shareNote(sender: UIBarButtonItem) {
         
@@ -203,6 +204,8 @@ class PlacesDetailNotesViewController: UIViewController, MKMapViewDelegate,CLLoc
         
         
     }
+    
+   
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(true)

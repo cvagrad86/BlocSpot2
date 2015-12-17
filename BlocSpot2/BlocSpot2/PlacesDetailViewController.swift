@@ -18,10 +18,10 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
 
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var detailMapView: MKMapView!
-   
+    @IBOutlet weak var date: UIDatePicker!
     
     var currentPlace: Places!
-    //var plDetails: PlacesDetails!
+    var plDetails: PlacesDetails!
     var placeLongitude = Double()
     var placeLatitude = Double()
     var pointAnnotation:MKPointAnnotation!
@@ -30,6 +30,7 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
     var savedAnnotation:MKAnnotation!
     var inititalLocation:CLLocationCoordinate2D!
     var locationManager = CLLocationManager()
+    var dateVisited = NSDate()
     
     var pickerDataSource = ["Pyrénées Atlantique", "Haute Pyrenees", "Haute Garonne", "Ariege", "Andorra", "Pyrénées Orientales"];
     
@@ -46,11 +47,7 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
             currentPlace = Places.MR_createEntity() as Places
             currentPlace.name = ""
         }
-        //if let date = plDetails {
-        //} else {
-           // plDetails = PlacesDetails.MR_createEntity() as PlacesDetails
-            //plDetails.date = NSDate
-       // }
+      
         
         let startingLocation = CLLocationCoordinate2DMake(self.placeLatitude, self.placeLongitude)
         
@@ -132,23 +129,32 @@ class PlacesDetailViewController: UIViewController,MKMapViewDelegate,CLLocationM
         currentPlace.name = nameLabel.text!
         currentPlace.longitude = placeLongitude
         currentPlace.latitude = placeLatitude
-            
-        //let date = NSDate()
-        //let calendar = NSCalendar.currentCalendar()
-            
-        //plDetails.date = date
-            
-        //print(plDetails.date)
+        // crashes - found nil = plDetails.date = date.date
            
        }
         
         
 }
 
+    @IBAction func dateAdded(sender: UIDatePicker) {
+        
+        var dataString = "April 1, 2015" as String
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy"
+        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+        let dateValue = dateFormatter.dateFromString(dataString) as NSDate!
+        print(dateValue)
+        //doesnt crash, but also does not appear to save
+        plDetails.date = date.date
+        }
+        
+        
+        
+    }
     
        
         
-    }
+
 
 extension PlacesDetailViewController: UITextFieldDelegate {
     

@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
             
            MagicalRecord.setupCoreDataStackWithStoreNamed("Places")
+            MagicalRecord.setupCoreDataStackWithStoreNamed("PlacesDetails")
             
             Fabric.with([MGLAccountManager.self, Crashlytics.self])
 
